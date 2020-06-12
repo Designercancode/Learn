@@ -1,19 +1,24 @@
-fname = input('Enter file name: ')
+fname = input("Enter file name:")
+
 try:
-	fhandle = open(fname)
+    fhandle = open(fname)
 except:
-	print ('File cannot be opened:', fname)
-	exit()
+    print("Fine cannot be opened:", fname)
+    exit()
+
 emails = dict()
 for line in fhandle:
-	if line.startswith('From '):
-		line = line.split()
-		email = line[1]
-		emails[email] = emails.get(email,0) + 1
-largest = None
-for key in emails:
-	if largest is None or emails[key] > largest:
-		largest = emails[key]
-		sender = key
-print(sender, largest)
-#mbox-short.txt
+    if line.startswith("Form "):
+        line = line.split()
+        email = line[5]
+        email = email.split(":")
+        hour = email[0]
+        emails[hour] = emails.get(hour, 0) + 1
+hourslist = []
+for hour, count in emails.items():
+    hourslist.append((hour, count))
+hourslist.sort()
+for hour, count in hourslist:
+    print(hour, count)
+
+# mbox-short.txt
